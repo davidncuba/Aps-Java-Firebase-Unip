@@ -59,14 +59,11 @@ public class EspeciesTableModel extends AbstractTableModel {
         }
     }
 
-//    "Espécie", "Nome Comum", "Fauna/Flora", "Grupo", "Família", "Categoria de Ameaça"
-
-    //Adicionamos várias linhas na tabela de uma vez, recebendo um List de UsuarioModel
-    public void addLista(ArrayList<EspeciesModel> usuario) {
+    public void addLista(ArrayList<EspeciesModel> especies) {
         int tamanhoAntigo = getRowCount();
 
-        //Adiciona os usuários
-        linhas.addAll(usuario);
+        //Adiciona linas 
+        linhas.addAll(especies);
 
         //Aqui reportamos a mudança para o JTable, assim ele pode se redesenhar, para visualizarmos a alteração
         fireTableRowsInserted(tamanhoAntigo, getRowCount() - 1);
