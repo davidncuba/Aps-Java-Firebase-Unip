@@ -18,7 +18,7 @@ import java.util.Map;
 import model.EspeciesModel;
 
 public class CsvToJson {
-
+//private static final String CSV_FILE_PATH = "./data.csv";
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final DatabaseReference especiesRef = database.getReference().child("especies");
 
@@ -32,7 +32,7 @@ public class CsvToJson {
         try {
             URL stockURL = new URL(site);
             BufferedReader reader = new BufferedReader(new InputStreamReader(stockURL.openStream()));
-
+//            Reader reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
             CSVReader csvReader = new CSVReader(reader, ';');
 
             // Reading Records One by One in a String array
