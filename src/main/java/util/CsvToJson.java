@@ -19,17 +19,21 @@ import model.EspeciesModel;
 
 public class CsvToJson {
 //private static final String CSV_FILE_PATH = "./data.csv";
+
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final DatabaseReference especiesRef = database.getReference().child("especies");
+    
+    public CsvToJson(boolean clear) {
 
-    public CsvToJson() {
-        csvToJson();
+        csvToJson(clear);
     }
 
-    private void csvToJson() {
+    private void csvToJson(boolean clear) {
 
-        String site = "http://dados.mma.gov.br/dataset/41a79b71-445f-4a6a-8c70-d46af991292a/resource/1f13b062-f3f6-4198-a4c5-3581548bebec/download/lista-de-especies-ameacas-2020.csv";
         try {
+
+            String site = "http://dados.mma.gov.br/dataset/41a79b71-445f-4a6a-8c70-d46af991292a/resource/1f13b062-f3f6-4198-a4c5-3581548bebec/download/lista-de-especies-ameacas-2020.csv";
+
             URL stockURL = new URL(site);
             BufferedReader reader = new BufferedReader(new InputStreamReader(stockURL.openStream()));
 //            Reader reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
@@ -64,7 +68,9 @@ public class CsvToJson {
                 especie.setNivelDeProtecao(nextRecord[12]);
                 especie.setEspecieExclusivaBrasil(nextRecord[13]);
                 especie.setEstados(nextRecord[14]);
-                especies.put(number_to_string.toString(), especie);
+                if (!clear) {
+                    especies.put(number_to_string.toString(), especie);
+                }
 
             }
             especiesRef.setValueAsync(especies);
